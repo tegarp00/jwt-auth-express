@@ -39,3 +39,29 @@ exports.createProduct = (req, res) => {
     })
   })
 }
+
+exports.updateProduct = async (req, res) => {
+
+  const { id } = req.params;
+  // update product
+  const product = await Product.findByPk(id);
+  if(!product) {
+    res.status(400).json({
+      message: "ID product tidak ditemukan"
+    })
+  }
+
+  const { title, desc, categories, price } = req.body
+  
+  try {
+    const updateProduct = await product.update({ title, desc, categories, price })
+    res.status(200).json({
+      message: "product berhasil diupdate",
+      data: updateProduct
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    })
+  }
+}

@@ -100,3 +100,20 @@ exports.products = async (req, res) => {
         data: products
     })
 };
+
+exports.getProductById = async (req, res) => {
+
+  const { id } = req.params
+  const product = await Product.findByPk(id)
+  if(!product) {
+    res.status(404).json({
+      message: "Product tidak ditemukan",
+      data: []
+    })
+  }
+
+  res.status(200).json({
+    message: "Product berhasil didapatkan",
+    data: product
+  })
+}
