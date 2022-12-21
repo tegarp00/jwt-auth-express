@@ -65,3 +65,26 @@ exports.updateProduct = async (req, res) => {
     })
   }
 }
+
+exports.deleteProduct = async (req, res) => {
+
+  const { id } = req.params;
+  // delete product
+  try {
+    let product = await Product.destroy({
+      where: { id: id },
+    })
+
+    if(!product) {
+      res.status(404).json({
+        message: "product tidak ditemukan",
+        data: null
+      })
+    }
+    
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    })
+  }
+}

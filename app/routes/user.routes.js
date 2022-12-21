@@ -1,6 +1,6 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controllers/user.controller");
-const { createProduct, updateProduct } = require("../controllers/user.controller")
+const { createProduct, updateProduct, deleteProduct } = require("../controllers/user.controller")
 const { products, getProductById } = require("../controllers/customer.controller");
 
 module.exports = function(app) {
@@ -36,4 +36,5 @@ module.exports = function(app) {
   app.put("/api/v1/product/:id", updateProduct)
   app.get("/api/v1/products", products);
   app.get("/api/v1/products/:id", getProductById);
+  app.delete("/api/v1/products/:id", deleteProduct);
 };
